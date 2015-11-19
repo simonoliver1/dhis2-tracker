@@ -4,6 +4,12 @@
             <tr>
                 <th ng-bind="dataElementLabel">
                 </th>
+                <th>
+                    Previous data
+                    <select>
+                        <option>Visit number #</option>
+                    </select>
+                </th>
                 <th ng-bind="valueLabel">
                 </th>
                 <th ng-if="allowProvidedElsewhereExists" ng-bind="providedElsewhereLabel">
@@ -17,6 +23,9 @@
                     <span class="glyphicon glyphicon-info-sign" ></span>
                     <span ng-show="showHelpText[prStDe.dataElement.id]" ><br>{{prStDe.dataElement.description}}</span>
                 </a>     
+            </td>
+            <td>
+                <input type="text" disabled value="VERDI" />
             </td>
             <td>
                 <ng-form name="innerForm">

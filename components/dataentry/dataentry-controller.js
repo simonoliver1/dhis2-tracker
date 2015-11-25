@@ -45,6 +45,7 @@ trackerCapture.controller('DataEntryController',
     $scope.warningMessages = {};
     $scope.hiddenSections = {};
     $scope.tableMaxNumberOfDataElements = 10;
+    $scope.previousEvent = null;
     
     //Labels
     $scope.dataElementLabel = $translate.instant('data_element');
@@ -436,7 +437,6 @@ trackerCapture.controller('DataEntryController',
 
     $scope.showDataEntry = function (event, rightAfterEnrollment) {
         if (event) {
-
             Paginator.setItemCount($scope.eventsByStage[event.programStage].length);
             Paginator.setPage($scope.eventsByStage[event.programStage].indexOf(event));
             Paginator.setPageCount(Paginator.getItemCount());
@@ -475,8 +475,8 @@ trackerCapture.controller('DataEntryController',
                         $scope.currentEvent.notes = orderByFilter($scope.currentEvent.notes, '-storedDate');
                     }
                 }
-
                 $scope.getDataEntryForm();
+                $scope.previousEvent = getPreviousEvent();
             }
         }
     };
@@ -1207,7 +1207,6 @@ trackerCapture.controller('DataEntryController',
         if (event) {
             $scope.showDataEntry(event, false);
         }
-        
     };
 
     $scope.showMap = function (event) {
@@ -1239,8 +1238,30 @@ trackerCapture.controller('DataEntryController',
         }
         return status;
     };
-    
-    
+
+    $scope.previousEventValue = function(dataElement) {
+        var retval = null;
+        angular.forEach($scope.previousEvent.dataValues, function (searchedValue) {
+            if (searchedValue.dataElement === dataElement.id) {
+                retval = searchedValue.value;
+            }
+        })
+        return retval;
+    };
+
+    function getPreviousEvent() {
+        var currentStageId = $scope.currentStage.id;
+        var stageEvents = $scope.eventsByStage[currentStageId];
+        if (stageEvents.length > 1) {
+            for (var i = 0; i < stageEvents.length; i++) {
+                if ($scope.currentEvent.event === stageEvents[i].event) {
+                    return stageEvents[i + 1];
+                }
+            }
+        } else {
+            return null;
+        }
+    }
 })
 
 .controller('EventCreationController',

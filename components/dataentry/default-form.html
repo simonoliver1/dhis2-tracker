@@ -25,7 +25,9 @@
                 </a>     
             </td>
             <td>
-                <input type="text" disabled value="Value" />
+                <div ng-if="previousEvent">
+                    <input type="text" disabled value="{{previousEventValue(prStDe.dataElement)}}" />
+                </div>
             </td>
             <td>
                 <ng-form name="innerForm">

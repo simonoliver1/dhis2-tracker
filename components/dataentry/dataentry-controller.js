@@ -46,7 +46,8 @@ trackerCapture.controller('DataEntryController',
     $scope.hiddenSections = {};
     $scope.tableMaxNumberOfDataElements = 10;
     $scope.previousEvent = null;
-    
+    $scope.selectedEvent = null;
+
     //Labels
     $scope.dataElementLabel = $translate.instant('data_element');
     $scope.valueLabel = $translate.instant('value');
@@ -1250,8 +1251,9 @@ trackerCapture.controller('DataEntryController',
     };
 
     function getPreviousEvent() {
-        var currentStageId = $scope.currentStage.id;
-        var stageEvents = $scope.eventsByStage[currentStageId];
+        var stageEvents = $scope.eventsByStage[$scope.currentStage.id];
+        console.log(stageEvents);
+
         if (stageEvents.length > 1) {
             for (var i = 0; i < stageEvents.length; i++) {
                 if ($scope.currentEvent.event === stageEvents[i].event) {
@@ -1261,6 +1263,10 @@ trackerCapture.controller('DataEntryController',
         } else {
             return null;
         }
+    }
+
+    $scope.changePreviousEvent = function(event) {
+        $scope.previousEvent = event;
     }
 })
 

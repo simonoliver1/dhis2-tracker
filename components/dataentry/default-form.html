@@ -6,10 +6,11 @@
                 </th>
                 <th ng-if="previousEvent" class="previous-event">
                     Previous data
-                    <select class="form-control" ng-model="event" ng-change="changePreviousEvent(event)"
-                            ng-options="event as event.sortingDate for event in eventsByStage[currentStage.id]">
-                    <option style="display: none;" value="">Select date</option>
+                    <select class="form-control" ng-model="selectedEvent.selected" ng-change="changePreviousEvent(selectedEvent.selected)"
+                            ng-options="selectedEvent as selectedEvent.sortingDate for selectedEvent in eventsByStage[currentStage.id]">
+                        <option style="display: none;" value="">Choose event</option>
                     </select>
+                    {{tull}}
                 </th>
                 <th class="align-center" ng-bind="valueLabel">
                 </th>

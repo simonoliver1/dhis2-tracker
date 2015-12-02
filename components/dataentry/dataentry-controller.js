@@ -46,7 +46,7 @@ trackerCapture.controller('DataEntryController',
     $scope.hiddenSections = {};
     $scope.tableMaxNumberOfDataElements = 10;
     $scope.previousEvent = null;
-    $scope.selectedEvent = null;
+    $scope.selectedEvent = { selected: null};
 
     //Labels
     $scope.dataElementLabel = $translate.instant('data_element');
@@ -1251,8 +1251,10 @@ trackerCapture.controller('DataEntryController',
     };
 
     function getPreviousEvent() {
+        if(angular.isDefined($scope.selectedEvent.selected)) {
+            delete $scope.selectedEvent.selected;
+        }
         var stageEvents = $scope.eventsByStage[$scope.currentStage.id];
-        console.log(stageEvents);
 
         if (stageEvents.length > 1) {
             for (var i = 0; i < stageEvents.length; i++) {

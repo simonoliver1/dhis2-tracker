@@ -4,9 +4,9 @@
             <tr>
                 <th ng-bind="dataElementLabel">
                 </th>
-                <th>
+                <th class="previous-event">
                     Previous data
-                    <select>
+                    <select class="form-control">
                         <option>Visit number #</option>
                     </select>
                 </th>
@@ -24,9 +24,9 @@
                     <span ng-show="showHelpText[prStDe.dataElement.id]" ><br>{{prStDe.dataElement.description}}</span>
                 </a>     
             </td>
-            <td>
+            <td class="previous-event previous-event-value">
                 <div ng-if="previousEvent">
-                    <input type="text" disabled value="{{previousEventValue(prStDe.dataElement)}}" />
+                    <span>{{previousEventValue(prStDe.dataElement)}}</span>
                 </div>
             </td>
             <td>

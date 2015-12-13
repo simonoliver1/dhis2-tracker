@@ -4,10 +4,11 @@
             <tr>
                 <th ng-bind="dataElementLabel">
                 </th>
-                <th class="previous-event">
+                <th ng-if="previousEvent" class="previous-event">
                     Previous data
-                    <select class="form-control">
-                        <option>Visit number #</option>
+                    <select class="form-control" ng-model="selectedEvent.selected" ng-change="changePreviousEvent(selectedEvent.selected)"
+                            ng-options="selectedEvent as selectedEvent.sortingDate for selectedEvent in eventsByStage[currentStage.id]">
+                        <option style="display: none;" value="">Choose event</option>
                     </select>
                 </th>
                 <th class="align-center" ng-bind="valueLabel">
@@ -24,8 +25,8 @@
                     <span ng-show="showHelpText[prStDe.dataElement.id]" ><br>{{prStDe.dataElement.description}}</span>
                 </a>     
             </td>
-            <td class="previous-event previous-event-value">
-                <div ng-if="previousEvent">
+            <td ng-if="previousEvent" class="previous-event previous-event-value">
+                <div>
                     <span>{{previousEventValue(prStDe.dataElement)}}</span>
                 </div>
             </td>
